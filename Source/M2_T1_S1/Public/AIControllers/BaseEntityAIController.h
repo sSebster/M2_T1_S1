@@ -13,5 +13,9 @@ UCLASS()
 class M2_T1_S1_API ABaseEntityAIController : public AAIController
 {
 	GENERATED_BODY()
-	
+	ABaseEntityAIController();
+public:
+private:
+protected:
+	virtual void OnPossess(APawn* InPawn) override;
 };
