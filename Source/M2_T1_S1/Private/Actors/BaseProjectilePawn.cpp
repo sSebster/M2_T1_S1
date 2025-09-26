@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Actors/BaseProjectile.h"
+#include "Actors/BaseProjectilePawn.h"
 
 // Sets default values
-ABaseProjectile::ABaseProjectile()
+ABaseProjectilePawn::ABaseProjectilePawn()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -12,21 +12,21 @@ ABaseProjectile::ABaseProjectile()
 }
 
 // Called when the game starts or when spawned
-void ABaseProjectile::BeginPlay()
+void ABaseProjectilePawn::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void ABaseProjectile::Tick(float DeltaTime)
+void ABaseProjectilePawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 }
 
 // Called to bind functionality to input
-void ABaseProjectile::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void ABaseProjectilePawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 

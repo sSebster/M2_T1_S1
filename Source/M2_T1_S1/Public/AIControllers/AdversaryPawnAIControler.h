@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BehaviorTree/BehaviorTree.h"
-#include "BaseEntityBehaviorTree.generated.h"
+#include "AIController.h"
+#include "AdversaryPawnAIControler.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class M2_T1_S1_API UBaseEntityBehaviorTree : public UBehaviorTree
+class M2_T1_S1_API AAdversaryPawnAIControler : public AAIController
 {
 	GENERATED_BODY()
 	

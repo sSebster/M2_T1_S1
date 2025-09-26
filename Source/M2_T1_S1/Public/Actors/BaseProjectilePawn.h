@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-#include "BaseProjectile.generated.h"
+#include "BaseProjectilePawn.generated.h"
 
 UCLASS()
-class M2_T1_S1_API ABaseProjectile : public APawn
+class M2_T1_S1_API ABaseProjectilePawn : public APawn
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this pawn's properties
-	ABaseProjectile();
+	ABaseProjectilePawn();
 
 protected:
 	// Called when the game starts or when spawned
