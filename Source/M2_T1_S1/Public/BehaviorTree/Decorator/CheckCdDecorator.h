@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTDecorator.h"
-#include "D_CheckCdDecorator.generated.h"
+#include "CheckCdDecorator.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class M2_T1_S1_API UD_CheckCdDecorator : public UBTDecorator
+class M2_T1_S1_API UCheckCdDecorator : public UBTDecorator
 {
 	GENERATED_BODY()
 	
