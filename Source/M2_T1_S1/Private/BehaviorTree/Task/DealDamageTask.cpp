@@ -3,3 +3,9 @@
 
 #include "BehaviorTree/Task/DealDamageTask.h"
 
+UDealDamageTask::UDealDamageTask()
+{
+	NodeName = TEXT("Deal damage");
+	// Task instantanée : pas de Tick ?
+	//bNotifyTick = false;
+}

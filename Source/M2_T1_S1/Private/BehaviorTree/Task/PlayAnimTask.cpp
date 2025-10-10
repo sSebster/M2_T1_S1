@@ -3,3 +3,9 @@
 
 #include "BehaviorTree/Task/PlayAnimTask.h"
 
+UPlayAnimTask::UPlayAnimTask()
+{
+	NodeName = TEXT("Play animation");
+	// Task instantanée : pas de Tick ?
+	//bNotifyTick = false;
+}

@@ -3,3 +3,9 @@
 
 #include "BehaviorTree/Task/SpawnAOETask.h"
 
+USpawnAOETask::USpawnAOETask()
+{
+	NodeName = TEXT("Spawn AOE");
+	// Task instantanée : pas de Tick ?
+	//bNotifyTick = false;
+}

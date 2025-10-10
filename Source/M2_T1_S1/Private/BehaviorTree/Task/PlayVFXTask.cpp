@@ -3,3 +3,9 @@
 
 #include "BehaviorTree/Task/PlayVFXTask.h"
 
+UPlayVFXTask::UPlayVFXTask()
+{
+	NodeName = TEXT("Play VFX");
+	// Task instantanée : pas de Tick ?
+	//bNotifyTick = false;
+}
