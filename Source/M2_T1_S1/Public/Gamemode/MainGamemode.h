@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "Actors/BaseEntityPawn.h"
 #include "MainGamemode.generated.h"
 
 /**
@@ -13,5 +14,15 @@ UCLASS()
 class M2_T1_S1_API AMainGamemode : public AGameModeBase
 {
 	GENERATED_BODY()
+
+	public:
+	TArray<ABaseEntityPawn*> Team1Entity;
+	TArray<ABaseEntityPawn*> Team2Entity;
+
+	int money;
+	int LevelAdversary;
+	int LevelPlayerATK;
+	int LevelPlayerPV;
+
 	
 };

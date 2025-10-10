@@ -15,6 +15,11 @@ public:
 	// Sets default values for this pawn's properties
 	ABaseEntityPawn();
 
+private:
+	UPROPERTY(EditAnywhere,Category="Visual")
+	USkeletalMeshComponent* Visual;
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -25,5 +30,12 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	FTimerHandle TimerHandleCD1;
+	FTimerHandle TimerHandleCD2;
+	FTimerHandle TimerHandleCD3;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Projectile")
+	FVector ProjectileSpawnLocation;
 
 };
