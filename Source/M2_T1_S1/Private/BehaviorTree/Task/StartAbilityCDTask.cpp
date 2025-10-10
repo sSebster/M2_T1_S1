@@ -9,3 +9,8 @@ UStartAbilityCDTask::UStartAbilityCDTask()
 	// Task instantanée : pas de Tick ?
 	//bNotifyTick = false;
 }
+
+EBTNodeResult::Type UStartAbilityCDTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+{
+	return Super::ExecuteTask(OwnerComp, NodeMemory);
+}

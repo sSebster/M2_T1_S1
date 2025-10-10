@@ -9,3 +9,8 @@ UPlayVFXTask::UPlayVFXTask()
 	// Task instantanée : pas de Tick ?
 	//bNotifyTick = false;
 }
+
+EBTNodeResult::Type UPlayVFXTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+{
+	return Super::ExecuteTask(OwnerComp, NodeMemory);
+}

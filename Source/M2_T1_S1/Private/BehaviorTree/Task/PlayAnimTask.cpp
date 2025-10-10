@@ -9,3 +9,8 @@ UPlayAnimTask::UPlayAnimTask()
 	// Task instantanée : pas de Tick ?
 	//bNotifyTick = false;
 }
+
+EBTNodeResult::Type UPlayAnimTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+{
+	return Super::ExecuteTask(OwnerComp, NodeMemory);
+}

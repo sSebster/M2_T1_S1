@@ -9,3 +9,8 @@ USpawnAOETask::USpawnAOETask()
 	// Task instantanée : pas de Tick ?
 	//bNotifyTick = false;
 }
+
+EBTNodeResult::Type USpawnAOETask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+{
+	return Super::ExecuteTask(OwnerComp, NodeMemory);
+}
