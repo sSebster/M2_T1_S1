@@ -24,5 +24,6 @@ class M2_T1_S1_API AMainGamemode : public AGameModeBase
 	int LevelPlayerATK;
 	int LevelPlayerPV;
 
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Abilities")
+	UDataTable* DataTable;
 };

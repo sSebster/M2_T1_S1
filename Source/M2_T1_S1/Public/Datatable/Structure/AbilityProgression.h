@@ -14,7 +14,5 @@ struct M2_T1_S1_API FAbilityProgression : public FTableRowBase
 {
 	GENERATED_BODY()
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Ability)
-	FName Ability;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Ability)
 	int level;
 };
