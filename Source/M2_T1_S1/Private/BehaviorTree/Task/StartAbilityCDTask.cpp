@@ -3,3 +3,9 @@
 
 #include "BehaviorTree/Task/StartAbilityCDTask.h"
 
+UStartAbilityCDTask::UStartAbilityCDTask()
+{
+	NodeName = TEXT("Start ability CD");
+	// Task instantanée : pas de Tick ?
+	//bNotifyTick = false;
+}

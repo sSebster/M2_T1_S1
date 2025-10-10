@@ -13,5 +13,7 @@ UCLASS()
 class M2_T1_S1_API UStartAbilityCDTask : public UBTTaskNode
 {
 	GENERATED_BODY()
-	
+
+	UStartAbilityCDTask();
+	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 };

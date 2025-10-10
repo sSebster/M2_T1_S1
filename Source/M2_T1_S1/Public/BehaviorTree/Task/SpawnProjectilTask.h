@@ -13,5 +13,7 @@ UCLASS()
 class M2_T1_S1_API USpawnProjectilTask : public UBTTaskNode
 {
 	GENERATED_BODY()
-	
+
+	USpawnProjectilTask();
+	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 };
