@@ -14,3 +14,8 @@ EBTNodeResult::Type UAddTargetToListTask::ExecuteTask(UBehaviorTreeComponent& Ow
 {
 	return Super::ExecuteTask(OwnerComp, NodeMemory);
 }
+
+EBTNodeResult::Type UAddTargetToListTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+{
+	return Super::ExecuteTask(OwnerComp, NodeMemory);
+}
