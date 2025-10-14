@@ -14,8 +14,3 @@ EBTNodeResult::Type UPlayVFXTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
 {
 	return Super::ExecuteTask(OwnerComp, NodeMemory);
 }
-
-EBTNodeResult::Type UPlayVFXTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
-{
-	return Super::ExecuteTask(OwnerComp, NodeMemory);
-}

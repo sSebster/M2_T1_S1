@@ -14,8 +14,3 @@ EBTNodeResult::Type UStartAbilityCDTask::ExecuteTask(UBehaviorTreeComponent& Own
 {
 	return Super::ExecuteTask(OwnerComp, NodeMemory);
 }
-
-EBTNodeResult::Type UStartAbilityCDTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
-{
-	return Super::ExecuteTask(OwnerComp, NodeMemory);
-}

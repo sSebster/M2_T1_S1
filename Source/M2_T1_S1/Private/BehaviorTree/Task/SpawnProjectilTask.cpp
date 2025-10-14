@@ -15,7 +15,3 @@ EBTNodeResult::Type USpawnProjectilTask::ExecuteTask(UBehaviorTreeComponent& Own
 	return Super::ExecuteTask(OwnerComp, NodeMemory);
 }
 
-EBTNodeResult::Type USpawnProjectilTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
-{
-	return Super::ExecuteTask(OwnerComp, NodeMemory);
-}
