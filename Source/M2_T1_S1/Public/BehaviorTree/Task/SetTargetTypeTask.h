@@ -18,5 +18,5 @@ protected:
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 public:
 	UPROPERTY(EditAnywhere, Category = "Task")
-	GameTargetType sizeAOE;
+	EGameTargetType TargetTypeToSet;
 };
