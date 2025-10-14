@@ -13,5 +13,9 @@ UCLASS()
 class M2_T1_S1_API USetSizeAOETask : public UBTTaskNode
 {
 	GENERATED_BODY()
-	
+protected:
+	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+public:
+	UPROPERTY(EditAnywhere, Category = "Task")
+	float sizeAOE;
 };
