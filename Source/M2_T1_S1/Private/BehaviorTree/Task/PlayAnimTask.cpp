@@ -14,3 +14,8 @@ EBTNodeResult::Type UPlayAnimTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 {
 	return Super::ExecuteTask(OwnerComp, NodeMemory);
 }
+
+EBTNodeResult::Type UPlayAnimTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+{
+	return Super::ExecuteTask(OwnerComp, NodeMemory);
+}
