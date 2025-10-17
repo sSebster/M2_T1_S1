@@ -31,10 +31,6 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	FTimerHandle TimerHandleCD1;
-	FTimerHandle TimerHandleCD2;
-	FTimerHandle TimerHandleCD3;
-
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Projectile")
 	FVector ProjectileSpawnLocation;
 

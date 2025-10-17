@@ -9,6 +9,9 @@
 /**
  * 
  */
+class ABaseEntityPawn;
+class AMainGamemode;
+
 UCLASS()
 class M2_T1_S1_API UAddTargetToListTask : public UBTTaskNode
 {
@@ -16,4 +19,6 @@ class M2_T1_S1_API UAddTargetToListTask : public UBTTaskNode
 
 	UAddTargetToListTask();
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+	TArray<ABaseEntityPawn*> getEnemyTeam(int myTeam,AMainGamemode* MainGamemode);
+	
 };

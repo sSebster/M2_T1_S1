@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "Actors/BaseEntityPawn.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "BaseEntityAIController.generated.h"
 
@@ -16,6 +17,9 @@ class M2_T1_S1_API ABaseEntityAIController : public AAIController
 	GENERATED_BODY()
 	ABaseEntityAIController();
 public:
+	TArray<ABaseEntityPawn*> getTargets();
+	void AddTargetToList(ABaseEntityPawn* Pawn);
+	void clearTargetsList();
 private:
 protected:
 	virtual void OnPossess(APawn* InPawn) override;
@@ -30,6 +34,9 @@ protected:
 	void StartAI();
 	UFUNCTION(BlueprintCallable, Category = "AI")
 	void StopAI();
+
+	UPROPERTY()
+	TArray<ABaseEntityPawn*> listTargets;
 
 	UBlackboardComponent* BlackboardComponent;
 	UBehaviorTreeComponent* BehaviorTreeComponent;

@@ -3,6 +3,8 @@
 
 #include "BehaviorTree/Task/StartAbilityCDTask.h"
 
+#include "BehaviorTree/BlackboardComponent.h"
+
 UStartAbilityCDTask::UStartAbilityCDTask()
 {
 	NodeName = TEXT("Start ability CD");
@@ -12,5 +14,21 @@ UStartAbilityCDTask::UStartAbilityCDTask()
 
 EBTNodeResult::Type UStartAbilityCDTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-	return Super::ExecuteTask(OwnerComp, NodeMemory);
+	BlackboardComp = OwnerComp.GetBlackboardComponent();
+	if (BlackboardComp == nullptr) return EBTNodeResult::Failed;
+	FTimerManager& TimerManager = GetWorld()->GetTimerManager();
+	TimerManager.SetTimer(
+		timerCD,
+		this,
+		&UStartAbilityCDTask::onTimerFinished,
+		duration
+	);
+	BlackboardComp->SetValueAsBool(FName("Ability"+FString::FromInt(AbilityAffectedByTimer)+"CD"),true);
+	return EBTNodeResult::Succeeded;
 }
+
+void UStartAbilityCDTask::onTimerFinished()
+{
+	BlackboardComp->SetValueAsBool(FName("Ability"+FString::FromInt(AbilityAffectedByTimer)+"CD"),false);
+}
+

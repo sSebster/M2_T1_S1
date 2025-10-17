@@ -13,6 +13,21 @@ ABaseEntityAIController::ABaseEntityAIController()
 	BehaviorTreeComponent = CreateDefaultSubobject<UBehaviorTreeComponent>(TEXT("BehaviorTreeComponent"));
 }
 
+TArray<ABaseEntityPawn*> ABaseEntityAIController::getTargets()
+{
+	return listTargets;
+}
+
+void ABaseEntityAIController::AddTargetToList(ABaseEntityPawn* TargetPawn)
+{
+	if (!listTargets.Contains(TargetPawn)) listTargets.Add(TargetPawn);
+}
+
+void ABaseEntityAIController::clearTargetsList()
+{
+	listTargets.Empty();
+}
+
 void ABaseEntityAIController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
