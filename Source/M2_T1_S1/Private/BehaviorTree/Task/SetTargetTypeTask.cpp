@@ -10,6 +10,6 @@ EBTNodeResult::Type USetTargetTypeTask::ExecuteTask(UBehaviorTreeComponent& Owne
 {
 	UBlackboardComponent* BlackboardComp = OwnerComp.GetBlackboardComponent();
 	if (BlackboardComp == nullptr) return EBTNodeResult::Failed;
-	BlackboardComp->SetValueAsEnum("MaxTarget", static_cast<uint8>(TargetTypeToSet));
+	BlackboardComp->SetValueAsEnum("TargetType", static_cast<uint8>(TargetTypeToSet));
 	return EBTNodeResult::Succeeded;
 }

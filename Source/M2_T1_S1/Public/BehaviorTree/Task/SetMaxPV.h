@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTTaskNode.h"
-#include "SetATKTask.generated.h"
+#include "SetMaxPV.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class M2_T1_S1_API USetATKTask : public UBTTaskNode
+class M2_T1_S1_API USetMaxPV : public UBTTaskNode
 {
 	GENERATED_BODY()
 protected:

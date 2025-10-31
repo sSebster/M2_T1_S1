@@ -1,20 +1,22 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTTaskNode.h"
-#include "SetATKTask.generated.h"
+#include "SetPVTask.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class M2_T1_S1_API USetATKTask : public UBTTaskNode
+class M2_T1_S1_API USetPVTask : public UBTTaskNode
 {
 	GENERATED_BODY()
+
 protected:
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+public:
 	UPROPERTY(EditAnywhere,Category="Task")
 	float Value = 0;
 };

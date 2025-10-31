@@ -35,6 +35,7 @@ EBTNodeResult::Type UAddTargetToListTask::ExecuteTask(UBehaviorTreeComponent& Ow
 	if (MainGamemode == nullptr) return EBTNodeResult::Failed;
 	int currentTeam= BlackboardComp->GetValueAsInt(FName("Team"));
 	float SizeAOE = BlackboardComp->GetValueAsFloat(FName("SizeAOE"));
+	AIController->clearTargetsList();
 	
 	for (ABaseEntityPawn* Element : getEnemyTeam(currentTeam, MainGamemode))
 	{
