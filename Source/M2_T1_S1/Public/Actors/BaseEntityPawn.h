@@ -5,11 +5,15 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "BaseEntityPawn.generated.h"
+class UFloatingPawnMovement;
+
 
 UCLASS()
+
 class M2_T1_S1_API ABaseEntityPawn : public APawn
 {
 	GENERATED_BODY()
+	
 
 public:
 	// Sets default values for this pawn's properties
@@ -42,5 +46,7 @@ public:
 
 	UPROPERTY(EditAnywhere,Category="Visual")
 	USkeletalMeshComponent* Visual;
+	UPROPERTY(EditAnywhere,Category="Component")
+	UFloatingPawnMovement* FloatingPawnMovement;
 
 };

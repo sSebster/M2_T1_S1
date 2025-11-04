@@ -3,12 +3,15 @@
 
 #include "Actors/BaseEntityPawn.h"
 
+#include "GameFramework/FloatingPawnMovement.h"
+
 // Sets default values
 ABaseEntityPawn::ABaseEntityPawn()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	Visual = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Visuel"));
+	FloatingPawnMovement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("pawnFloatingMovement"));
 	
 }
 
