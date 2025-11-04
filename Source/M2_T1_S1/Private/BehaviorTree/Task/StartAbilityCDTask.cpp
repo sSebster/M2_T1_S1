@@ -3,6 +3,7 @@
 
 #include "BehaviorTree/Task/StartAbilityCDTask.h"
 
+#include "Actors/BaseEntityPawn.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
 UStartAbilityCDTask::UStartAbilityCDTask()
@@ -14,21 +15,31 @@ UStartAbilityCDTask::UStartAbilityCDTask()
 
 EBTNodeResult::Type UStartAbilityCDTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-	BlackboardComp = OwnerComp.GetBlackboardComponent();
+	UBlackboardComponent* BlackboardComp = OwnerComp.GetBlackboardComponent();
 	if (BlackboardComp == nullptr) return EBTNodeResult::Failed;
+	ABaseEntityPawn* selfActor= Cast<ABaseEntityPawn>(BlackboardComp->GetValueAsObject("SelfActor"));
+	int localAbilityAffectedByTimer=AbilityAffectedByTimer;
 	FTimerManager& TimerManager = GetWorld()->GetTimerManager();
+	FTimerDelegate TimerDel;
+	TimerDel.BindLambda([BlackboardComp, localAbilityAffectedByTimer]()
+	{
+		if (!BlackboardComp) return;
+
+		BlackboardComp->SetValueAsBool(
+			FName("Ability" + FString::FromInt(localAbilityAffectedByTimer) + "CD"),
+			false
+		);
+
+		UE_LOG(LogTemp, Warning, TEXT("Cooldown ability %d terminé."), localAbilityAffectedByTimer);
+	});
 	TimerManager.SetTimer(
-		timerCD,
-		this,
-		&UStartAbilityCDTask::onTimerFinished,
-		duration
+	selfActor->AbilitiesTimers[localAbilityAffectedByTimer - 1],
+	TimerDel,
+	duration,
+	false // non looping
 	);
 	BlackboardComp->SetValueAsBool(FName("Ability"+FString::FromInt(AbilityAffectedByTimer)+"CD"),true);
 	return EBTNodeResult::Succeeded;
 }
 
-void UStartAbilityCDTask::onTimerFinished()
-{
-	BlackboardComp->SetValueAsBool(FName("Ability"+FString::FromInt(AbilityAffectedByTimer)+"CD"),false);
-}
 

@@ -3,6 +3,9 @@
 
 #include "BehaviorTree/Task/PlayVFXTask.h"
 
+#include "BehaviorTree/BlackboardComponent.h"
+#include "Kismet/GameplayStatics.h"
+
 UPlayVFXTask::UPlayVFXTask()
 {
 	NodeName = TEXT("Play VFX");
@@ -12,5 +15,16 @@ UPlayVFXTask::UPlayVFXTask()
 
 EBTNodeResult::Type UPlayVFXTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-	return Super::ExecuteTask(OwnerComp, NodeMemory);
+	UBlackboardComponent* BlackboardComp = OwnerComp.GetBlackboardComponent();
+	if (BlackboardComp == nullptr) return EBTNodeResult::Failed;
+	AActor* targetActor= Cast<AActor>(BlackboardComp->GetValueAsObject(TargetKey.SelectedKeyName));
+	if (targetActor == nullptr) return EBTNodeResult::Failed;
+	UGameplayStatics::SpawnEmitterAtLocation(
+		targetActor->GetWorld(),
+		VFXToPlay,
+		targetActor->GetActorLocation(),
+		targetActor->GetActorRotation(),
+		Scale
+	);
+	return EBTNodeResult::Succeeded;
 }

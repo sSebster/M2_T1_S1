@@ -16,13 +16,14 @@ public:
 	ABaseEntityPawn();
 
 private:
-	UPROPERTY(EditAnywhere,Category="Visual")
-	USkeletalMeshComponent* Visual;
+	
+	void InitAbilityTimers();
 
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
 
 public:	
 	// Called every frame
@@ -33,5 +34,13 @@ public:
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Projectile")
 	FVector ProjectileSpawnLocation;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Abilities")
+	int numbersOfAbilities=0;
+	
+	TArray<FTimerHandle> AbilitiesTimers;
+
+	UPROPERTY(EditAnywhere,Category="Visual")
+	USkeletalMeshComponent* Visual;
 
 };

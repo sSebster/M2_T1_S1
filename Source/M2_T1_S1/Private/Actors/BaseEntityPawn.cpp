@@ -9,7 +9,14 @@ ABaseEntityPawn::ABaseEntityPawn()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	Visual = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Visuel"));
+	
+}
 
+
+void ABaseEntityPawn::InitAbilityTimers()
+{
+	AbilitiesTimers.Empty();
+	AbilitiesTimers.SetNum(numbersOfAbilities);
 }
 
 // Called when the game starts or when spawned
@@ -32,4 +39,6 @@ void ABaseEntityPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
+
+
 
