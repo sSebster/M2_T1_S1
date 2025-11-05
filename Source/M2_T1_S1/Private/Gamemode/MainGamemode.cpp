@@ -10,6 +10,7 @@ void AMainGamemode::BeginPlay()
 {
 	Super::BeginPlay();
 	UGameplayStatics::GetAllActorsOfClassWithTag(GetWorld(),ASpawnPoint::StaticClass(),TagSpawnPoint,spawnPoints);
+	UGameplayStatics::GetAllActorsOfClassWithTag(GetWorld(),ASpawnPoint::StaticClass(),TagSpawnPointPlayer,spawnPointsPlayer);
 	index=0;
 	FTimerManager& TimerManager = GetWorld()->GetTimerManager();
 	TimerManager.SetTimer(
@@ -42,6 +43,25 @@ void AMainGamemode::SpawnEntity()
 
 	
 	index++;
+}
+
+void AMainGamemode::SpawnPlayerEntity(TSubclassOf<ABaseEntityPawn> entityToSpawn)
+{
+	if (spawnPointsPlayer.IsEmpty()) return;
+	if (spawnPointsPlayer.Num() > 1)
+	{
+		int32 IndexSpawnPoint = FMath::RandRange(0, spawnPointsPlayer.Num() - 1);
+		AActor* ChosenPoint = spawnPointsPlayer[IndexSpawnPoint];
+		FVector Location = ChosenPoint->GetActorLocation();
+		FRotator Rotation = ChosenPoint->GetActorRotation();
+		GetWorld()->SpawnActor<ABaseEntityPawn>(entityToSpawn, Location, Rotation);
+	}else
+	{
+		AActor* ChosenPoint = spawnPointsPlayer[0];
+		FVector Location = ChosenPoint->GetActorLocation();
+		FRotator Rotation = ChosenPoint->GetActorRotation();
+		GetWorld()->SpawnActor<ABaseEntityPawn>(entityToSpawn, Location, Rotation);
+	}
 }
 
 void AMainGamemode::upgradeAbility(FName AbilityName, int levelToAdd)
