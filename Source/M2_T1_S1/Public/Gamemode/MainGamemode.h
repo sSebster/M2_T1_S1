@@ -48,5 +48,6 @@ private:
 	TArray<TSubclassOf<ABaseEntityPawn>> EntitiesToSpawn;
 	int index;
 public:
+	UFUNCTION(BlueprintCallable, Category = "Abilities")
 	void upgradeAbility(FName AbilityName,int levelToAdd);
 };
