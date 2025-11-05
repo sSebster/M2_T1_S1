@@ -51,9 +51,9 @@ private:
 	TArray<AActor*> spawnPointsPlayer;
 	UPROPERTY(EditAnywhere, Category="SpawnPlayer")
 	FName TagSpawnPointPlayer;
-	UFUNCTION(BlueprintCallable, Category = "SpawnPlayer")
-	void SpawnPlayerEntity(TSubclassOf<ABaseEntityPawn> entityToSpawn);
 public:
 	UFUNCTION(BlueprintCallable, Category = "Abilities")
 	void upgradeAbility(FName AbilityName,int levelToAdd);
+	UFUNCTION(BlueprintCallable, Category = "SpawnPlayer")
+	void SpawnPlayerEntity(TSubclassOf<ABaseEntityPawn> entityToSpawn);
 };
