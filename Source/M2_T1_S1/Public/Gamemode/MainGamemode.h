@@ -51,6 +51,7 @@ private:
 	TArray<AActor*> spawnPointsPlayer;
 	UPROPERTY(EditAnywhere, Category="SpawnPlayer")
 	FName TagSpawnPointPlayer;
+	FTimerManager& TimerManager;
 public:
 	UFUNCTION(BlueprintCallable, Category = "Abilities")
 	void upgradeAbility(FName AbilityName,int levelToAdd);

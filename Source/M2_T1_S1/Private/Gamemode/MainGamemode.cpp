@@ -12,7 +12,7 @@ void AMainGamemode::BeginPlay()
 	UGameplayStatics::GetAllActorsOfClassWithTag(GetWorld(),ASpawnPoint::StaticClass(),TagSpawnPoint,spawnPoints);
 	UGameplayStatics::GetAllActorsOfClassWithTag(GetWorld(),ASpawnPoint::StaticClass(),TagSpawnPointPlayer,spawnPointsPlayer);
 	index=0;
-	FTimerManager& TimerManager = GetWorld()->GetTimerManager();
+	TimerManager = GetWorld()->GetTimerManager();
 	TimerManager.SetTimer(
 	SpawnTimer,
 	this,
@@ -43,7 +43,10 @@ void AMainGamemode::SpawnEntity()
 		Team2Entity.Add(EntitySpawned);
 	}
 
-	
+	if(index >= EntitiesToSpawn.Num())
+	{
+		TimerManager.ClearTimer(SpawnTimer);
+	}
 	index++;
 }
 
