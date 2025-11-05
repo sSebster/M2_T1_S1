@@ -15,11 +15,13 @@ class M2_T1_S1_API AMainGamemode : public AGameModeBase
 {
 	GENERATED_BODY()
 
-	public:
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Teams")
 	TArray<ABaseEntityPawn*> Team1Entity;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Teams")
 	TArray<ABaseEntityPawn*> Team2Entity;
+
+	
 
 	int money;
 	int LevelAdversary;
@@ -27,5 +29,24 @@ class M2_T1_S1_API AMainGamemode : public AGameModeBase
 	int LevelPlayerPV;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Abilities")
-	UDataTable* DataTable;
+	TMap<FName,int> AbilityMap;
+	
+
+protected:
+	virtual void BeginPlay() override;
+
+private:
+	UPROPERTY(EditAnywhere, Category="Spawn")
+	float SpawnDelay;
+	UPROPERTY()
+	TArray<AActor*> spawnPoints;
+	UPROPERTY(EditAnywhere, Category="Spawn")
+	FName TagSpawnPoint;
+	FTimerHandle SpawnTimer;
+	void SpawnEntity();
+	UPROPERTY(EditAnywhere, Category = "Spawn")
+	TArray<TSubclassOf<ABaseEntityPawn>> EntitiesToSpawn;
+	int index;
+public:
+	void upgradeAbility(FName AbilityName,int levelToAdd);
 };

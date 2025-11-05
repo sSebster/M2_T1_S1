@@ -45,7 +45,7 @@ EBTNodeResult::Type UStartAbilityCDTask::ExecuteTask(UBehaviorTreeComponent& Own
 	selfActor->AbilitiesTimers[localAbilityAffectedByTimer - 1],
 	TimerDel,
 	duration,
-	false // non looping
+	false
 	);
 	BlackboardComp->SetValueAsBool(FName("Ability"+FString::FromInt(AbilityAffectedByTimer)+"CD"),true);
 	return EBTNodeResult::Succeeded;
