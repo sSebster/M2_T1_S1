@@ -16,7 +16,11 @@ UPlayAnimTask::UPlayAnimTask()
 EBTNodeResult::Type UPlayAnimTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	BlackboardComp = OwnerComp.GetBlackboardComponent();
-	if (BlackboardComp == nullptr) return EBTNodeResult::Failed;
+	if (BlackboardComp == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load blackboard"))
+		return EBTNodeResult::Failed;
+	}
 	targetActor= Cast<ABaseEntityPawn>(BlackboardComp->GetValueAsObject(TargetKey.SelectedKeyName));
 	if (targetActor == nullptr) return EBTNodeResult::Failed;
 	meshToAnimate=targetActor->Visual;

@@ -16,7 +16,9 @@ class M2_T1_S1_API AMainGamemode : public AGameModeBase
 	GENERATED_BODY()
 
 	public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Teams")
 	TArray<ABaseEntityPawn*> Team1Entity;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Teams")
 	TArray<ABaseEntityPawn*> Team2Entity;
 
 	int money;

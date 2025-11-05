@@ -19,7 +19,11 @@ EBTNodeResult::Type UDealDamageTask::ExecuteTask(UBehaviorTreeComponent& OwnerCo
 {
 	
 	UBlackboardComponent* BlackboardComp = OwnerComp.GetBlackboardComponent();
-	if (BlackboardComp == nullptr) return EBTNodeResult::Failed;
+	if (BlackboardComp == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load blackboard"))
+		return EBTNodeResult::Failed;
+	}
 	ABaseEntityPawn* target = Cast<ABaseEntityPawn>(BlackboardComp->GetValueAsObject("CurrentTarget"));
 	if (target == nullptr) return EBTNodeResult::Failed;
 	ABaseEntityAIController* AIController = Cast<ABaseEntityAIController>(target->GetController());

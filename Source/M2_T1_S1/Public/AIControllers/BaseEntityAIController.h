@@ -20,7 +20,6 @@ public:
 	TArray<ABaseEntityPawn*> getTargets();
 	void AddTargetToList(ABaseEntityPawn* Pawn);
 	void clearTargetsList();
-private:
 protected:
 	virtual void OnPossess(APawn* InPawn) override;
 	virtual void OnUnPossess() override;
@@ -35,7 +34,7 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "AI")
 	void StopAI();
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Debug")
 	TArray<ABaseEntityPawn*> listTargets;
 
 	UBlackboardComponent* BlackboardComponent;

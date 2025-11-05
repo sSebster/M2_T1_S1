@@ -20,19 +20,35 @@ UAddTargetToListTask::UAddTargetToListTask()
 EBTNodeResult::Type UAddTargetToListTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	UBlackboardComponent* BlackboardComp = OwnerComp.GetBlackboardComponent();
-	if (BlackboardComp == nullptr) return EBTNodeResult::Failed;
+	if (BlackboardComp == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load blackboard"))
+		return EBTNodeResult::Failed;
+	}
 
 	ABaseEntityPawn* currentTarget = Cast<ABaseEntityPawn>(BlackboardComp->GetValueAsObject("CurrentTarget"));
 	if (currentTarget == nullptr) return EBTNodeResult::Failed;
 	
 	ABaseEntityPawn* Entity = Cast<ABaseEntityPawn>(BlackboardComp->GetValueAsObject(FName("SelfActor")));
-	if (Entity == nullptr) return EBTNodeResult::Failed;
+	if (Entity == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load actor"))
+		return EBTNodeResult::Failed;
+	}
 	ABaseEntityAIController* AIController = Cast<ABaseEntityAIController>(Entity->GetController());
 	if (AIController == nullptr) return EBTNodeResult::Failed;
 	UWorld* World = OwnerComp.GetWorld();
-	if (World == nullptr) return EBTNodeResult::Failed;
+	if (World == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load world"))
+		return EBTNodeResult::Failed;
+	}
 	AMainGamemode* MainGamemode = Cast<AMainGamemode>(UGameplayStatics::GetGameMode(World));
-	if (MainGamemode == nullptr) return EBTNodeResult::Failed;
+	if (MainGamemode == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load gamemode"))
+		return EBTNodeResult::Failed;
+	}
 	int currentTeam= BlackboardComp->GetValueAsInt(FName("Team"));
 	float SizeAOE = BlackboardComp->GetValueAsFloat(FName("SizeAOE"));
 	AIController->clearTargetsList();
@@ -45,7 +61,6 @@ EBTNodeResult::Type UAddTargetToListTask::ExecuteTask(UBehaviorTreeComponent& Ow
 			AIController->AddTargetToList(Element);
 		}
 	}
-	
 	
 	return EBTNodeResult::Succeeded;
 }

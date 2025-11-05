@@ -10,13 +10,25 @@
 EBTNodeResult::Type UInitMaxPV::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	UBlackboardComponent* BlackboardComp = OwnerComp.GetBlackboardComponent();
-	if (BlackboardComp == nullptr) return EBTNodeResult::Failed;
+	if (BlackboardComp == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load blackboard"))
+		return EBTNodeResult::Failed;
+	}
 	UCurveFloat* PvCurve = Cast<UCurveFloat>(BlackboardComp->GetValueAsObject(FName("CurvePV"))) ;
 	if (PvCurve == nullptr) return EBTNodeResult::Failed;
 	UWorld* World = OwnerComp.GetWorld();
-	if (World == nullptr) return EBTNodeResult::Failed;
+	if (World == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load world"))
+		return EBTNodeResult::Failed;
+	}
 	AMainGamemode* MainGamemode = Cast<AMainGamemode>(UGameplayStatics::GetGameMode(World));
-	if (MainGamemode == nullptr) return EBTNodeResult::Failed;
+	if (MainGamemode == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load gamemode"))
+		return EBTNodeResult::Failed;
+	}
 	BlackboardComp->SetValueAsFloat(FName("MaxPV"),PvCurve->GetFloatValue(MainGamemode->LevelPlayerPV));
 	return EBTNodeResult::Succeeded;
 }

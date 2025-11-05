@@ -16,7 +16,11 @@ UPlayVFXTask::UPlayVFXTask()
 EBTNodeResult::Type UPlayVFXTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	UBlackboardComponent* BlackboardComp = OwnerComp.GetBlackboardComponent();
-	if (BlackboardComp == nullptr) return EBTNodeResult::Failed;
+	if (BlackboardComp == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load blackboard"))
+		return EBTNodeResult::Failed;
+	}
 	AActor* targetActor= Cast<AActor>(BlackboardComp->GetValueAsObject(TargetKey.SelectedKeyName));
 	if (targetActor == nullptr) return EBTNodeResult::Failed;
 	UGameplayStatics::SpawnEmitterAtLocation(

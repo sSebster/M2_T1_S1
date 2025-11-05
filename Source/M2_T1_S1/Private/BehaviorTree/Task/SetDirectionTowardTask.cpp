@@ -11,10 +11,18 @@ USetDirectionTowardTask::USetDirectionTowardTask()
 EBTNodeResult::Type USetDirectionTowardTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	UBlackboardComponent* BlackboardComp = OwnerComp.GetBlackboardComponent();
-	if (!BlackboardComp) return EBTNodeResult::Failed;
+	if (BlackboardComp == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load blackboard"))
+		return EBTNodeResult::Failed;
+	}
 
 	APawn* Pawn = Cast<APawn>(BlackboardComp->GetValueAsObject("SelfActor"));
-	if (!Pawn) return EBTNodeResult::Failed;
+	if (Pawn == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load actor"))
+		return EBTNodeResult::Failed;
+	}
 
 	
 	if (!Pawn->GetMovementComponent() || !Pawn->GetMovementComponent()->IsA<UFloatingPawnMovement>())

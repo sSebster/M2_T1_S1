@@ -1,13 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "BehaviorTree/Task/InitATKTask.h"
+#include "BehaviorTree/Task/DebugAddToTeamTask.h"
 
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Gamemode/MainGamemode.h"
 #include "Kismet/GameplayStatics.h"
 
-EBTNodeResult::Type UInitATKTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+EBTNodeResult::Type UDebugAddToTeamTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	UBlackboardComponent* BlackboardComp = OwnerComp.GetBlackboardComponent();
 	if (BlackboardComp == nullptr)
@@ -15,8 +15,12 @@ EBTNodeResult::Type UInitATKTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
 		UE_LOG(LogTemp,Error,TEXT("failed to load blackboard"))
 		return EBTNodeResult::Failed;
 	}
-	UCurveFloat* AtkCurve = Cast<UCurveFloat>(BlackboardComp->GetValueAsObject(FName("CurveATK"))) ;
-	if (AtkCurve == nullptr) return EBTNodeResult::Failed;
+	ABaseEntityPawn* selfActor= Cast<ABaseEntityPawn>(BlackboardComp->GetValueAsObject("SelfActor"));
+	if (selfActor == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load actor"))
+		return EBTNodeResult::Failed;
+	}
 	UWorld* World = OwnerComp.GetWorld();
 	if (World == nullptr)
 	{
@@ -29,6 +33,19 @@ EBTNodeResult::Type UInitATKTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
 		UE_LOG(LogTemp,Error,TEXT("failed to load gamemode"))
 		return EBTNodeResult::Failed;
 	}
-	BlackboardComp->SetValueAsFloat(FName("ATK"),AtkCurve->GetFloatValue(MainGamemode->LevelPlayerATK));
+	switch (value)
+	{
+		case 1:
+			MainGamemode->Team1Entity.Add(selfActor);
+		break;
+		case 2:
+			MainGamemode->Team2Entity.Add(selfActor);
+		break;
+		default:
+			MainGamemode->Team1Entity.Add(selfActor);
+		break;
+	}
+	UE_LOG(LogTemp, Log, TEXT("task add team finished"));
 	return EBTNodeResult::Succeeded;
+	
 }

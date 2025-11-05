@@ -9,9 +9,17 @@
 EBTNodeResult::Type UDealAOEDamageTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	UBlackboardComponent* BlackboardComp = OwnerComp.GetBlackboardComponent();
-	if (BlackboardComp == nullptr) return EBTNodeResult::Failed;
+	if (BlackboardComp == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load blackboard"))
+		return EBTNodeResult::Failed;
+	}
 	ABaseEntityPawn* selfActor= Cast<ABaseEntityPawn>(BlackboardComp->GetValueAsObject("SelfActor"));
-	if (selfActor == nullptr) return EBTNodeResult::Failed;
+	if (selfActor == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load actor"))
+		return EBTNodeResult::Failed;
+	}
 	ABaseEntityAIController* AIController=Cast<ABaseEntityAIController>(selfActor->GetController());
 	if (AIController == nullptr) return EBTNodeResult::Failed;
 	if (AIController->getTargets().IsEmpty()) return EBTNodeResult::Failed;

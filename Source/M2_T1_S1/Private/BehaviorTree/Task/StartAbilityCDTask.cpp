@@ -16,8 +16,17 @@ UStartAbilityCDTask::UStartAbilityCDTask()
 EBTNodeResult::Type UStartAbilityCDTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	UBlackboardComponent* BlackboardComp = OwnerComp.GetBlackboardComponent();
-	if (BlackboardComp == nullptr) return EBTNodeResult::Failed;
+	if (BlackboardComp == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load blackboard"))
+		return EBTNodeResult::Failed;
+	}
 	ABaseEntityPawn* selfActor= Cast<ABaseEntityPawn>(BlackboardComp->GetValueAsObject("SelfActor"));
+	if (selfActor == nullptr)
+	{
+		UE_LOG(LogTemp,Error,TEXT("failed to load actor"))
+		return EBTNodeResult::Failed;
+	}
 	int localAbilityAffectedByTimer=AbilityAffectedByTimer;
 	FTimerManager& TimerManager = GetWorld()->GetTimerManager();
 	FTimerDelegate TimerDel;
