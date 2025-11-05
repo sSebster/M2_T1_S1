@@ -32,13 +32,15 @@ void AMainGamemode::SpawnEntity()
 		AActor* ChosenPoint = spawnPoints[IndexSpawnPoint];
 		FVector Location = ChosenPoint->GetActorLocation();
 		FRotator Rotation = ChosenPoint->GetActorRotation();
-		GetWorld()->SpawnActor<ABaseEntityPawn>(EntitiesToSpawn[index], Location, Rotation);
+		ABaseEntityPawn* EntitySpawned=GetWorld()->SpawnActor<ABaseEntityPawn>(EntitiesToSpawn[index], Location, Rotation);
+		Team2Entity.Add(EntitySpawned);
 	}else
 	{
 		AActor* ChosenPoint = spawnPoints[0];
 		FVector Location = ChosenPoint->GetActorLocation();
 		FRotator Rotation = ChosenPoint->GetActorRotation();
-		GetWorld()->SpawnActor<ABaseEntityPawn>(EntitiesToSpawn[index], Location, Rotation);
+		ABaseEntityPawn* EntitySpawned=GetWorld()->SpawnActor<ABaseEntityPawn>(EntitiesToSpawn[index], Location, Rotation);
+		Team2Entity.Add(EntitySpawned);
 	}
 
 	
@@ -54,13 +56,16 @@ void AMainGamemode::SpawnPlayerEntity(TSubclassOf<ABaseEntityPawn> entityToSpawn
 		AActor* ChosenPoint = spawnPointsPlayer[IndexSpawnPoint];
 		FVector Location = ChosenPoint->GetActorLocation();
 		FRotator Rotation = ChosenPoint->GetActorRotation();
-		GetWorld()->SpawnActor<ABaseEntityPawn>(entityToSpawn, Location, Rotation);
+		ABaseEntityPawn* EntitySpawned=GetWorld()->SpawnActor<ABaseEntityPawn>(entityToSpawn, Location, Rotation);
+		Team1Entity.Add(EntitySpawned);
+		
 	}else
 	{
 		AActor* ChosenPoint = spawnPointsPlayer[0];
 		FVector Location = ChosenPoint->GetActorLocation();
 		FRotator Rotation = ChosenPoint->GetActorRotation();
-		GetWorld()->SpawnActor<ABaseEntityPawn>(entityToSpawn, Location, Rotation);
+		ABaseEntityPawn* EntitySpawned=GetWorld()->SpawnActor<ABaseEntityPawn>(entityToSpawn, Location, Rotation);
+		Team1Entity.Add(EntitySpawned);
 	}
 }
 
