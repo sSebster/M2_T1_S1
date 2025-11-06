@@ -41,5 +41,14 @@ EBTNodeResult::Type UDealAOEDamageTask::ExecuteTask(UBehaviorTreeComponent& Owne
 	float ATK= BlackboardComp->GetValueAsFloat("ATK");
 	float Value=DamageCurve->GetFloatValue(ATK);
 	BlackboardComponentTarget->SetValueAsFloat("PV",BlackboardComp->GetValueAsFloat("PV") - Value);
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(
+			-1,                    // Key (ID unique). -1 = nouvelle ligne à chaque fois
+			5.f,                   // Durée d’affichage en secondes
+			FColor::Green,         // Couleur du texte
+			FString::Printf(TEXT("entity a fait %f degats en AOE"),ATK) // Le message
+		);
+	}
 	return EBTNodeResult::Succeeded;
 }

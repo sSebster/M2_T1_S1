@@ -49,19 +49,31 @@ void ABaseProjectile::OnProjectileHit(UPrimitiveComponent* HitComp, AActor* Othe
 									  const FHitResult& Hit)
 {
 	if (!OtherActor || OtherActor == this || OtherActor==Owner)
+	{
+		UE_LOG(LogTemp, Error, TEXT("missing"));
 		return;
+	}
+		
 	
 	
 	ABaseEntityAIController* AIController = Cast<ABaseEntityAIController>(OtherActor->GetInstigatorController());
 	if (AIController)
 	{
 		UBlackboardComponent* Blackboard = AIController->GetBlackboardComponent();
-		if (Blackboard->GetValueAsInt("Team") ==team) return;
 		if (Blackboard && Blackboard->IsValidKey(Blackboard->GetKeyID("PV")))
 		{
 			float PV = Blackboard->GetValueAsFloat("PV");
 			PV -= Damages;
 			Blackboard->SetValueAsFloat("PV", PV);
+			if (GEngine)
+			{
+				GEngine->AddOnScreenDebugMessage(
+					-1,                    // Key (ID unique). -1 = nouvelle ligne à chaque fois
+					5.f,                   // Durée d’affichage en secondes
+					FColor::Green,         // Couleur du texte
+					FString::Printf(TEXT("projectile a fait %f degats"),Damages) // Le message
+				);
+			}
 		}
 	}
 	
