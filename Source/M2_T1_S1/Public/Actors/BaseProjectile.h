@@ -1,10 +1,11 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "BaseProjectile.generated.h"
+
+class USphereComponent;
+class UProjectileMovementComponent;
 
 UCLASS()
 class M2_T1_S1_API ABaseProjectile : public AActor
@@ -12,16 +13,36 @@ class M2_T1_S1_API ABaseProjectile : public AActor
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	ABaseProjectile();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Projectile")
+	USphereComponent* CollisionComponent;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Projectile")
+	UProjectileMovementComponent* ProjectileMovement;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Projectile")
+	UStaticMeshComponent* MeshComponent;
+	
 
 public:
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	UPROPERTY()
-	float Damages;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Projectile")
+	float Speed = 1500.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Projectile")
+	float Damages = 10.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Projectile")
+	bool bPassThrough = false;
+
+protected:
+	UFUNCTION()
+	void OnProjectileHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
+						 UPrimitiveComponent* OtherComp, FVector NormalImpulse,
+						 const FHitResult& Hit);
 };
