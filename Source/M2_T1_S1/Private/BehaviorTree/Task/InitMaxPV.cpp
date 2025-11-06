@@ -29,6 +29,13 @@ EBTNodeResult::Type UInitMaxPV::ExecuteTask(UBehaviorTreeComponent& OwnerComp, u
 		UE_LOG(LogTemp,Error,TEXT("failed to load gamemode"))
 		return EBTNodeResult::Failed;
 	}
-	BlackboardComp->SetValueAsFloat(FName("MaxPV"),PvCurve->GetFloatValue(MainGamemode->LevelPlayerPV));
+	if (AdversaryEntity)
+	{
+		BlackboardComp->SetValueAsFloat(FName("MaxPV"),PvCurve->GetFloatValue(MainGamemode->LevelAdversary));
+	}else
+	{
+		BlackboardComp->SetValueAsFloat(FName("MaxPV"),PvCurve->GetFloatValue(MainGamemode->LevelPlayerPV));
+	}
+	
 	return EBTNodeResult::Succeeded;
 }

@@ -29,6 +29,13 @@ EBTNodeResult::Type UInitPVTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, 
 		UE_LOG(LogTemp,Error,TEXT("failed to load gamemode"))
 		return EBTNodeResult::Failed;
 	}
-	BlackboardComp->SetValueAsFloat(FName("PV"),PvCurve->GetFloatValue(MainGamemode->LevelPlayerPV));
+	if (AdversaryEntity)
+	{
+		BlackboardComp->SetValueAsFloat(FName("PV"),PvCurve->GetFloatValue(MainGamemode->LevelAdversary));
+	}else
+	{
+		BlackboardComp->SetValueAsFloat(FName("PV"),PvCurve->GetFloatValue(MainGamemode->LevelAdversary));
+	}
+	
 	return EBTNodeResult::Succeeded;
 }
