@@ -39,7 +39,7 @@ EBTNodeResult::Type UDealDamageTask::ExecuteTask(UBehaviorTreeComponent& OwnerCo
 			-1,                    // Key (ID unique). -1 = nouvelle ligne à chaque fois
 			5.f,                   // Durée d’affichage en secondes
 			FColor::Green,         // Couleur du texte
-			FString::Printf(TEXT("entity a fait %f degats en AOE"),ATK) // Le message
+			FString::Printf(TEXT("entity a fait %f degats en attack direct"),ATK) // Le message
 		);
 	}
 	return EBTNodeResult::Succeeded;
