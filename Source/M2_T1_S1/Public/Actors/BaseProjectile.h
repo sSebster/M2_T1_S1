@@ -4,6 +4,7 @@
 #include "GameFramework/Actor.h"
 #include "BaseProjectile.generated.h"
 
+class ABaseEntityPawn;
 class USphereComponent;
 class UProjectileMovementComponent;
 
@@ -42,6 +43,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Projectile")
 	float LifeTime = 15.0f;
+
+	ABaseEntityPawn* ownerProjectile;
+	int team;
 
 protected:
 	UFUNCTION()

@@ -5,6 +5,7 @@
 #include "AIController.h"
 #include "AIControllers/BaseEntityAIController.h"
 #include "GameFramework/Actor.h"
+#include "Actors/BaseEntityPawn.h"
 #include "Kismet/GameplayStatics.h"
 
 ABaseProjectile::ABaseProjectile()
@@ -47,13 +48,15 @@ void ABaseProjectile::OnProjectileHit(UPrimitiveComponent* HitComp, AActor* Othe
 									  UPrimitiveComponent* OtherComp, FVector NormalImpulse,
 									  const FHitResult& Hit)
 {
-	if (!OtherActor || OtherActor == this)
+	if (!OtherActor || OtherActor == this || OtherActor==Owner)
 		return;
+	
 	
 	ABaseEntityAIController* AIController = Cast<ABaseEntityAIController>(OtherActor->GetInstigatorController());
 	if (AIController)
 	{
 		UBlackboardComponent* Blackboard = AIController->GetBlackboardComponent();
+		if (Blackboard->GetValueAsInt("Team") ==team) return;
 		if (Blackboard && Blackboard->IsValidKey(Blackboard->GetKeyID("PV")))
 		{
 			float PV = Blackboard->GetValueAsFloat("PV");

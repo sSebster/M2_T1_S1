@@ -25,10 +25,10 @@ public:
 
 	
 
-	int money;
-	int LevelAdversary;
-	int LevelPlayerATK;
-	int LevelPlayerPV;
+	int money=0;
+	int LevelAdversary=1;
+	int LevelPlayerATK=1;
+	int LevelPlayerPV=1;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Abilities")
 	TMap<FName,int> AbilityMap;

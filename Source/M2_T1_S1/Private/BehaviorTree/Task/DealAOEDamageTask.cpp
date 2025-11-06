@@ -25,12 +25,21 @@ EBTNodeResult::Type UDealAOEDamageTask::ExecuteTask(UBehaviorTreeComponent& Owne
 	if (AIController->getTargets().IsEmpty()) return EBTNodeResult::Failed;
 	for (ABaseEntityPawn* target : AIController->getTargets())
 	{
+		if (target == nullptr) continue;
 		ABaseEntityAIController* AIControllerTarget= Cast<ABaseEntityAIController>(target->GetController());
 		UBlackboardComponent* BlackboardComponentTarget = AIControllerTarget->GetBlackboardComponent();
 		float ATK= BlackboardComp->GetValueAsFloat("ATK");
 		float Value=DamageCurve->GetFloatValue(ATK);
 		BlackboardComponentTarget->SetValueAsFloat("PV",BlackboardComponentTarget->GetValueAsFloat("PV") - Value);
 	}
-	
+	ABaseEntityPawn* mainTarget= Cast<ABaseEntityPawn>(BlackboardComp->GetValueAsObject("CurrentTarget"));
+	if (mainTarget == nullptr) return EBTNodeResult::Failed;
+	ABaseEntityAIController* AIControllerMainTarget = Cast<ABaseEntityAIController>(mainTarget->GetController());
+	if (AIControllerMainTarget == nullptr) return EBTNodeResult::Failed;
+	UBlackboardComponent* BlackboardComponentTarget = AIControllerMainTarget->GetBlackboardComponent();
+	if (BlackboardComponentTarget==nullptr) return EBTNodeResult::Failed;
+	float ATK= BlackboardComp->GetValueAsFloat("ATK");
+	float Value=DamageCurve->GetFloatValue(ATK);
+	BlackboardComponentTarget->SetValueAsFloat("PV",BlackboardComp->GetValueAsFloat("PV") - Value);
 	return EBTNodeResult::Succeeded;
 }

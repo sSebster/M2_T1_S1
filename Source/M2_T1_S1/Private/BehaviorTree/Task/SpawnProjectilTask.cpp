@@ -38,6 +38,8 @@ EBTNodeResult::Type USpawnProjectilTask::ExecuteTask(UBehaviorTreeComponent& Own
 	if (!ProjectileSpawned) return EBTNodeResult::Failed;
 
 	ProjectileSpawned->Damages = DamageCurve->GetFloatValue(BlackboardComp->GetValueAsFloat("ATK"));
+	ProjectileSpawned->ownerProjectile = SelfActor;
+	ProjectileSpawned->team = BlackboardComp->GetValueAsInt("Team");
 
 	return EBTNodeResult::Succeeded;
 }

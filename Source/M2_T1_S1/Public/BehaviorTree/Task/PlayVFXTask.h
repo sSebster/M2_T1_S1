@@ -31,4 +31,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VFX")
 	FVector OffsetVF=FVector::ZeroVector;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VFX")
+	float LifeTime = 2.0f;
+
 };

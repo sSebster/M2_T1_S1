@@ -5,6 +5,7 @@
 
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystemComponent.h"
 
 UPlayVFXTask::UPlayVFXTask()
 {
@@ -23,12 +24,33 @@ EBTNodeResult::Type UPlayVFXTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
 	}
 	AActor* targetActor= Cast<AActor>(BlackboardComp->GetValueAsObject(TargetKey.SelectedKeyName));
 	if (targetActor == nullptr) return EBTNodeResult::Failed;
-	UGameplayStatics::SpawnEmitterAtLocation(
+	UParticleSystemComponent* SpawnedVFX = UGameplayStatics::SpawnEmitterAtLocation(
 		targetActor->GetWorld(),
 		VFXToPlay,
 		targetActor->GetActorLocation(),
 		targetActor->GetActorRotation(),
-		Scale
+		Scale,
+		true
 	);
+	if (SpawnedVFX == nullptr) return EBTNodeResult::Failed;
+
+	if (SpawnedVFX && LifeTime > 0.f)
+	{
+		// Détruire le composant après LifeTime secondes
+		FTimerHandle TimerHandle;
+		targetActor->GetWorld()->GetTimerManager().SetTimer(
+			TimerHandle,
+			[SpawnedVFX]()
+			{
+				if (SpawnedVFX)
+				{
+					SpawnedVFX->DestroyComponent();
+				}
+			},
+			LifeTime,
+			false
+		);
+	}
+	
 	return EBTNodeResult::Succeeded;
 }
