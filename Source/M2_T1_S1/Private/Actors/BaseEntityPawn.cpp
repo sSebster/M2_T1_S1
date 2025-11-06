@@ -26,7 +26,7 @@ void ABaseEntityPawn::InitAbilityTimers()
 void ABaseEntityPawn::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	InitAbilityTimers();
 }
 
 // Called every frame

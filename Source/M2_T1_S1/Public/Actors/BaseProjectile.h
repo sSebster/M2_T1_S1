@@ -40,6 +40,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Projectile")
 	bool bPassThrough = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Projectile")
+	float LifeTime = 15.0f;
+
 protected:
 	UFUNCTION()
 	void OnProjectileHit(UPrimitiveComponent* HitComp, AActor* OtherActor,

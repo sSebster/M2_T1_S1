@@ -41,6 +41,13 @@ EBTNodeResult::Type UStartAbilityCDTask::ExecuteTask(UBehaviorTreeComponent& Own
 
 		UE_LOG(LogTemp, Warning, TEXT("Cooldown ability %d terminé."), localAbilityAffectedByTimer);
 	});
+	if (!selfActor->AbilitiesTimers.IsValidIndex(localAbilityAffectedByTimer - 1))
+	{
+		UE_LOG(LogTemp, Error, TEXT("Invalid index %d for AbilitiesTimers (size: %d)"),
+			localAbilityAffectedByTimer - 1,
+			selfActor->AbilitiesTimers.Num());
+		return EBTNodeResult::Failed;
+	}
 	TimerManager.SetTimer(
 	selfActor->AbilitiesTimers[localAbilityAffectedByTimer - 1],
 	TimerDel,

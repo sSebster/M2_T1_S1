@@ -43,7 +43,8 @@ public:
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Abilities")
 	int numbersOfAbilities=0;
-	
+
+	UPROPERTY(EditAnywhere,Category="Debug")
 	TArray<FTimerHandle> AbilitiesTimers;
 
 	UPROPERTY(EditAnywhere,Category="Visual")
