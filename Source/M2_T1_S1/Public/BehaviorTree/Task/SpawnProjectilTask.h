@@ -6,6 +6,7 @@
 #include "BehaviorTree/BTTaskNode.h"
 #include "SpawnProjectilTask.generated.h"
 
+class ABaseProjectile;
 /**
  * 
  */
@@ -16,4 +17,8 @@ class M2_T1_S1_API USpawnProjectilTask : public UBTTaskNode
 
 	USpawnProjectilTask();
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+	UPROPERTY(EditAnywhere,Category="Projectil")
+	TSubclassOf<ABaseProjectile> Projectile;
+	UPROPERTY(EditAnywhere,Category="Projectil")
+	UCurveFloat* DamageCurve;
 };
