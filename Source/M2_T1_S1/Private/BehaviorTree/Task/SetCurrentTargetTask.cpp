@@ -21,6 +21,7 @@ EBTNodeResult::Type USetCurrentTargetTask::ExecuteTask(UBehaviorTreeComponent& O
 	if (Entity == nullptr) return EBTNodeResult::Failed;
 	ABaseEntityAIController* AIController = Cast<ABaseEntityAIController>(Entity->GetController());
 	if (AIController == nullptr) return EBTNodeResult::Failed;
+	float range = BlackboardComp->GetValueAsFloat("Range");
 	UWorld* World = OwnerComp.GetWorld();
 	if (World == nullptr)
 	{
@@ -40,6 +41,7 @@ EBTNodeResult::Type USetCurrentTargetTask::ExecuteTask(UBehaviorTreeComponent& O
 	for (ABaseEntityPawn* EntityEnemy : getEnemyTeam(currentTeam,MainGamemode))
 		{
 			float distance = (EntityEnemy->GetDistanceTo(Entity));
+			if (distance > range) continue;
 			if (distance < closest.Value)
 			{
 				closest.Value=distance;

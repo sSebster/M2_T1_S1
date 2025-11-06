@@ -13,5 +13,10 @@ UCLASS()
 class M2_T1_S1_API UsetRangeTask : public UBTTaskNode
 {
 	GENERATED_BODY()
-	
+
+public:
+	UPROPERTY(EditAnywhere,Category="Task")
+	float Value = 0;
+protected:
+	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 };

@@ -37,7 +37,9 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Projectile")
-	FVector ProjectileSpawnLocation;
+	FVector ProjectileSpawnLocationOffset;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Projectile")
+	FRotator ProjectileSpawnRotationOffset;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Abilities")
 	int numbersOfAbilities=0;
