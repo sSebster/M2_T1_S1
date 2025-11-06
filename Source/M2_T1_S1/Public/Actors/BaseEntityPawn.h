@@ -51,7 +51,4 @@ public:
 	USkeletalMeshComponent* Visual;
 	UPROPERTY(EditAnywhere,Category="Component")
 	UFloatingPawnMovement* FloatingPawnMovement;
-	void enableDeath();
-	bool canDie=false;
-	UBlackboardComponent* BlackboardComp;
 };

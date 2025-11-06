@@ -27,6 +27,7 @@ void AMainGamemode::BeginPlay()
 
 void AMainGamemode::SpawnEntity()
 {
+	
 	if (spawnPoints.IsEmpty()) return;
 	if (spawnPoints.Num() > 1)
 	{
@@ -36,9 +37,22 @@ void AMainGamemode::SpawnEntity()
 		FRotator Rotation = ChosenPoint->GetActorRotation();
 		ABaseEntityPawn* EntitySpawned=GetWorld()->SpawnActor<ABaseEntityPawn>(EntitiesToSpawn[index], Location, Rotation);
 		Team2Entity.Add(EntitySpawned);
-		AAIController* AIController = Cast<AAIController>(EntitySpawned->GetController());
-		UBlackboardComponent* blackbord=AIController->GetBlackboardComponent();
-		blackbord->SetValueAsInt("Team",2);
+		FTimerHandle TimerHandle;
+		GetWorld()->GetTimerManager().SetTimer(
+			TimerHandle,
+			[EntitySpawned]()
+			{
+				if (!EntitySpawned) return;
+
+				AAIController* AIController = Cast<AAIController>(EntitySpawned->GetController());
+				if (AIController && AIController->GetBlackboardComponent())
+				{
+					AIController->GetBlackboardComponent()->SetValueAsInt("Team", 2);
+				}
+			},
+			0.1f,
+			false
+		);
 	}else
 	{
 		AActor* ChosenPoint = spawnPoints[0];
@@ -46,14 +60,27 @@ void AMainGamemode::SpawnEntity()
 		FRotator Rotation = ChosenPoint->GetActorRotation();
 		ABaseEntityPawn* EntitySpawned=GetWorld()->SpawnActor<ABaseEntityPawn>(EntitiesToSpawn[index], Location, Rotation);
 		Team2Entity.Add(EntitySpawned);
-		AAIController* AIController = Cast<AAIController>(EntitySpawned->GetController());
-		UBlackboardComponent* blackbord=AIController->GetBlackboardComponent();
-		blackbord->SetValueAsInt("Team",2);
-	}
+		FTimerHandle TimerHandle;
+		GetWorld()->GetTimerManager().SetTimer(
+			TimerHandle,
+			[EntitySpawned]()
+			{
+				if (!EntitySpawned) return;
 
-	if(index >= EntitiesToSpawn.Num())
+				AAIController* AIController = Cast<AAIController>(EntitySpawned->GetController());
+				if (AIController && AIController->GetBlackboardComponent())
+				{
+					AIController->GetBlackboardComponent()->SetValueAsInt("Team", 2);
+				}
+			},
+			0.1f,
+			false
+		);
+	}
+	if(index >= EntitiesToSpawn.Num()-1)
 	{
 		GetWorld()->GetTimerManager().ClearTimer(SpawnTimer);
+		return;
 	}
 	index++;
 }
@@ -63,15 +90,29 @@ void AMainGamemode::SpawnPlayerEntity(TSubclassOf<ABaseEntityPawn> entityToSpawn
 	if (spawnPointsPlayer.IsEmpty()) return;
 	if (spawnPointsPlayer.Num() > 1)
 	{
+		
 		int32 IndexSpawnPoint = FMath::RandRange(0, spawnPointsPlayer.Num() - 1);
 		AActor* ChosenPoint = spawnPointsPlayer[IndexSpawnPoint];
 		FVector Location = ChosenPoint->GetActorLocation();
 		FRotator Rotation = ChosenPoint->GetActorRotation();
 		ABaseEntityPawn* EntitySpawned=GetWorld()->SpawnActor<ABaseEntityPawn>(entityToSpawn, Location, Rotation);
 		Team1Entity.Add(EntitySpawned);
-		AAIController* AIController = Cast<AAIController>(EntitySpawned->GetController());
-		UBlackboardComponent* blackbord=AIController->GetBlackboardComponent();
-		blackbord->SetValueAsInt("Team",1);
+		FTimerHandle TimerHandle;
+		GetWorld()->GetTimerManager().SetTimer(
+			TimerHandle,
+			[EntitySpawned]()
+			{
+				if (!EntitySpawned) return;
+
+				AAIController* AIController = Cast<AAIController>(EntitySpawned->GetController());
+				if (AIController && AIController->GetBlackboardComponent())
+				{
+					AIController->GetBlackboardComponent()->SetValueAsInt("Team", 1);
+				}
+			},
+			0.1f,
+			false
+		);
 		
 	}else
 	{
@@ -80,9 +121,22 @@ void AMainGamemode::SpawnPlayerEntity(TSubclassOf<ABaseEntityPawn> entityToSpawn
 		FRotator Rotation = ChosenPoint->GetActorRotation();
 		ABaseEntityPawn* EntitySpawned=GetWorld()->SpawnActor<ABaseEntityPawn>(entityToSpawn, Location, Rotation);
 		Team1Entity.Add(EntitySpawned);
-		AAIController* AIController = Cast<AAIController>(EntitySpawned->GetController());
-		UBlackboardComponent* blackbord=AIController->GetBlackboardComponent();
-		blackbord->SetValueAsInt("Team",1);
+		FTimerHandle TimerHandle;
+		GetWorld()->GetTimerManager().SetTimer(
+			TimerHandle,
+			[EntitySpawned]()
+			{
+				if (!EntitySpawned) return;
+
+				AAIController* AIController = Cast<AAIController>(EntitySpawned->GetController());
+				if (AIController && AIController->GetBlackboardComponent())
+				{
+					AIController->GetBlackboardComponent()->SetValueAsInt("Team", 1);
+				}
+			},
+			0.1f,
+			false
+		);
 	}
 }
 
