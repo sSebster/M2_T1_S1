@@ -2,7 +2,7 @@
 
 
 #include "Gamemode/MainGamemode.h"
-
+#include "TimerManager.h"
 #include "Actors/SpawnPoint.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -12,8 +12,7 @@ void AMainGamemode::BeginPlay()
 	UGameplayStatics::GetAllActorsOfClassWithTag(GetWorld(),ASpawnPoint::StaticClass(),TagSpawnPoint,spawnPoints);
 	UGameplayStatics::GetAllActorsOfClassWithTag(GetWorld(),ASpawnPoint::StaticClass(),TagSpawnPointPlayer,spawnPointsPlayer);
 	index=0;
-	TimerManager = GetWorld()->GetTimerManager();
-	TimerManager.SetTimer(
+	GetWorld()->GetTimerManager().SetTimer(
 	SpawnTimer,
 	this,
 	&AMainGamemode::SpawnEntity,
@@ -45,7 +44,7 @@ void AMainGamemode::SpawnEntity()
 
 	if(index >= EntitiesToSpawn.Num())
 	{
-		TimerManager.ClearTimer(SpawnTimer);
+		GetWorld()->GetTimerManager().ClearTimer(SpawnTimer);
 	}
 	index++;
 }

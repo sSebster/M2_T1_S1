@@ -10,6 +10,8 @@
 /**
  * 
  */
+class FTimerManager;
+
 UCLASS()
 class M2_T1_S1_API AMainGamemode : public AGameModeBase
 {
@@ -51,7 +53,6 @@ private:
 	TArray<AActor*> spawnPointsPlayer;
 	UPROPERTY(EditAnywhere, Category="SpawnPlayer")
 	FName TagSpawnPointPlayer;
-	FTimerManager& TimerManager;
 public:
 	UFUNCTION(BlueprintCallable, Category = "Abilities")
 	void upgradeAbility(FName AbilityName,int levelToAdd);

@@ -30,6 +30,8 @@ EBTNodeResult::Type UDealDamageTask::ExecuteTask(UBehaviorTreeComponent& OwnerCo
 	if (AIController == nullptr) return EBTNodeResult::Failed;
 	UBlackboardComponent* targetBlackboard= AIController->GetBlackboardComponent();
 	if (targetBlackboard == nullptr) return EBTNodeResult::Failed;
+	float ATK= BlackboardComp->GetValueAsFloat("ATK");
+	float Value=DamageCurve->GetFloatValue(ATK);
 	targetBlackboard->SetValueAsFloat("PV",targetBlackboard->GetValueAsFloat("PV") - Value);
 	return EBTNodeResult::Succeeded;
 }

@@ -27,6 +27,8 @@ EBTNodeResult::Type UDealAOEDamageTask::ExecuteTask(UBehaviorTreeComponent& Owne
 	{
 		ABaseEntityAIController* AIControllerTarget= Cast<ABaseEntityAIController>(target->GetController());
 		UBlackboardComponent* BlackboardComponentTarget = AIControllerTarget->GetBlackboardComponent();
+		float ATK= BlackboardComp->GetValueAsFloat("ATK");
+		float Value=DamageCurve->GetFloatValue(ATK);
 		BlackboardComponentTarget->SetValueAsFloat("PV",BlackboardComponentTarget->GetValueAsFloat("PV") - Value);
 	}
 	
