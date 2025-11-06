@@ -35,6 +35,7 @@ void ABaseProjectile::BeginPlay()
 
 	ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * Speed);
 	ProjectileMovement->Activate();
+	SetLifeSpan(LifeTime);
 }
 
 void ABaseProjectile::Tick(float DeltaTime)
